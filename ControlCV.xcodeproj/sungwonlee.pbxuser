@@ -22,22 +22,22 @@
 	};
 	28D7ACF60DDB3853001CB0EB /* ControlCVViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1573, 833}}";
-			sepNavSelRange = "{376, 0}";
-			sepNavVisRange = "{0, 383}";
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 848}}";
+			sepNavSelRange = "{542, 127}";
+			sepNavVisRange = "{0, 677}";
 		};
 	};
 	28D7ACF70DDB3853001CB0EB /* ControlCVViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1573, 2769}}";
-			sepNavSelRange = "{4620, 0}";
-			sepNavVisRange = "{158, 1757}";
+			sepNavIntBoundsRect = "{{0, 0}, {1187, 4030}}";
+			sepNavSelRange = "{1943, 0}";
+			sepNavVisRange = "{1228, 1127}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 457B8FD7124A41A300F5858F /* ControlCV */;
-		activeSDKPreference = iphonesimulator4.0;
+		activeSDKPreference = iphoneos4.1;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* ControlCV */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* ControlCV */,
@@ -71,10 +71,26 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 306941254;
-			PBXWorkspaceStateSaveDate = 306941254;
+			PBXPerProjectTemplateStateSaveDate = 306942940;
+			PBXWorkspaceStateSaveDate = 306942940;
 		};
 		perUserProjectItems = {
+			450946CA124BA12800479FC6 /* PBXTextBookmark */ = 450946CA124BA12800479FC6 /* PBXTextBookmark */;
+			450946CC124BA12800479FC6 /* PBXTextBookmark */ = 450946CC124BA12800479FC6 /* PBXTextBookmark */;
+			450946CD124BA12800479FC6 /* PBXTextBookmark */ = 450946CD124BA12800479FC6 /* PBXTextBookmark */;
+			450946DC124BA1FF00479FC6 /* PBXTextBookmark */ = 450946DC124BA1FF00479FC6 /* PBXTextBookmark */;
+			45094725124BAFF100479FC6 /* PBXTextBookmark */ = 45094725124BAFF100479FC6 /* PBXTextBookmark */;
+			45094727124BAFF100479FC6 /* PBXTextBookmark */ = 45094727124BAFF100479FC6 /* PBXTextBookmark */;
+			4509472C124BAFF100479FC6 /* PBXTextBookmark */ = 4509472C124BAFF100479FC6 /* PBXTextBookmark */;
+			4509474C124BB27C00479FC6 /* PBXTextBookmark */ = 4509474C124BB27C00479FC6 /* PBXTextBookmark */;
+			4509474D124BB27C00479FC6 /* PBXTextBookmark */ = 4509474D124BB27C00479FC6 /* PBXTextBookmark */;
+			4509474E124BB27C00479FC6 /* PBXTextBookmark */ = 4509474E124BB27C00479FC6 /* PBXTextBookmark */;
+			4509474F124BB27C00479FC6 /* PBXTextBookmark */ = 4509474F124BB27C00479FC6 /* PBXTextBookmark */;
+			45094751124BB27C00479FC6 /* PBXTextBookmark */ = 45094751124BB27C00479FC6 /* PBXTextBookmark */;
+			45094753124BB27C00479FC6 /* PBXTextBookmark */ = 45094753124BB27C00479FC6 /* PBXTextBookmark */;
+			45094754124BB27C00479FC6 /* PBXTextBookmark */ = 45094754124BB27C00479FC6 /* PBXTextBookmark */;
+			45094755124BB27C00479FC6 /* XCBuildMessageTextBookmark */ = 45094755124BB27C00479FC6 /* XCBuildMessageTextBookmark */;
+			45094756124BB27C00479FC6 /* PBXTextBookmark */ = 45094756124BB27C00479FC6 /* PBXTextBookmark */;
 			457B8FE7124A428E00F5858F /* PBXTextBookmark */ = 457B8FE7124A428E00F5858F /* PBXTextBookmark */;
 			457B9064124A496200F5858F /* PBXTextBookmark */ = 457B9064124A496200F5858F /* PBXTextBookmark */;
 			457B906F124A4A3C00F5858F /* PBXTextBookmark */ = 457B906F124A4A3C00F5858F /* PBXTextBookmark */;
@@ -87,7 +103,6 @@
 			45C512B6124B07E700A04E84 /* PBXTextBookmark */ = 45C512B6124B07E700A04E84 /* PBXTextBookmark */;
 			45C51309124B11E000A04E84 /* PBXTextBookmark */ = 45C51309124B11E000A04E84 /* PBXTextBookmark */;
 			45C5132C124B169E00A04E84 /* PBXTextBookmark */ = 45C5132C124B169E00A04E84 /* PBXTextBookmark */;
-			45C51331124B169E00A04E84 /* PBXTextBookmark */ = 45C51331124B169E00A04E84 /* PBXTextBookmark */;
 			45C51332124B169E00A04E84 /* PBXTextBookmark */ = 45C51332124B169E00A04E84 /* PBXTextBookmark */;
 			45C51341124B616400A04E84 /* PBXTextBookmark */ = 45C51341124B616400A04E84 /* PBXTextBookmark */;
 			45C51343124B616400A04E84 /* PBXTextBookmark */ = 45C51343124B616400A04E84 /* PBXTextBookmark */;
@@ -97,7 +112,6 @@
 			45C51427124B7A3800A04E84 /* PBXTextBookmark */ = 45C51427124B7A3800A04E84 /* PBXTextBookmark */;
 			45C5142D124B7A8300A04E84 /* PBXTextBookmark */ = 45C5142D124B7A8300A04E84 /* PBXTextBookmark */;
 			45C5142F124B7A8300A04E84 /* PBXTextBookmark */ = 45C5142F124B7A8300A04E84 /* PBXTextBookmark */;
-			45C51442124B7C4900A04E84 /* PBXTextBookmark */ = 45C51442124B7C4900A04E84 /* PBXTextBookmark */;
 			45C51444124B7C4900A04E84 /* PlistBookmark */ = 45C51444124B7C4900A04E84 /* PlistBookmark */;
 			45C5144B124B7D3F00A04E84 /* PBXTextBookmark */ = 45C5144B124B7D3F00A04E84 /* PBXTextBookmark */;
 			45C51465124B7F9800A04E84 /* PBXTextBookmark */ = 45C51465124B7F9800A04E84 /* PBXTextBookmark */;
@@ -105,9 +119,6 @@
 			45C514A6124B8A7600A04E84 /* PBXTextBookmark */ = 45C514A6124B8A7600A04E84 /* PBXTextBookmark */;
 			45C514D9124B8C5C00A04E84 /* PBXBookmark */ = 45C514D9124B8C5C00A04E84 /* PBXBookmark */;
 			45C514F3124B8CDF00A04E84 /* PBXTextBookmark */ = 45C514F3124B8CDF00A04E84 /* PBXTextBookmark */;
-			45D4E0EE124B8DE500FDB0C0 /* PBXTextBookmark */ = 45D4E0EE124B8DE500FDB0C0 /* PBXTextBookmark */;
-			45D4E0EF124B8DE500FDB0C0 /* PBXTextBookmark */ = 45D4E0EF124B8DE500FDB0C0 /* PBXTextBookmark */;
-			45D4E113124B8FA700FDB0C0 /* PBXTextBookmark */ = 45D4E113124B8FA700FDB0C0 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 457B8FE1124A41B300F5858F /* Source Control */;
 		userBuildSettings = {
@@ -126,6 +137,261 @@
 			sepNavSelRange = "{186, 0}";
 			sepNavVisRange = "{0, 187}";
 		};
+	};
+	450946B7124B9E7000479FC6 /* UIImage.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = UIImage.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIImage.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 949}}";
+			sepNavSelRange = "{1463, 0}";
+			sepNavVisRange = "{89, 3624}";
+		};
+	};
+	450946BA124B9E7000479FC6 /* CGImage.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = CGImage.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGImage.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 3263}}";
+			sepNavSelRange = "{3385, 0}";
+			sepNavVisRange = "{931, 2464}";
+		};
+	};
+	450946CA124BA12800479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 450946CB124BA12800479FC6 /* CFBase.h */;
+		name = "CFBase.h: 289";
+		rLen = 32;
+		rLoc = 10913;
+		rType = 0;
+		vrLen = 2064;
+		vrLoc = 9746;
+	};
+	450946CB124BA12800479FC6 /* CFBase.h */ = {
+		isa = PBXFileReference;
+		name = CFBase.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFBase.h;
+		sourceTree = "<absolute>";
+	};
+	450946CC124BA12800479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 450946BA124B9E7000479FC6 /* CGImage.h */;
+		name = "CGImage.h: 91";
+		rLen = 0;
+		rLoc = 3385;
+		rType = 0;
+		vrLen = 2464;
+		vrLoc = 931;
+	};
+	450946CD124BA12800479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 450946CE124BA12800479FC6 /* MacTypes.h */;
+		name = "MacTypes.h: 581";
+		rLen = 69;
+		rLoc = 23952;
+		rType = 0;
+		vrLen = 2754;
+		vrLoc = 22567;
+	};
+	450946CE124BA12800479FC6 /* MacTypes.h */ = {
+		isa = PBXFileReference;
+		name = MacTypes.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/usr/include/MacTypes.h;
+		sourceTree = "<absolute>";
+	};
+	450946DC124BA1FF00479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 450946DD124BA1FF00479FC6 /* UIGraphics.h */;
+		name = "UIGraphics.h: 28";
+		rLen = 64;
+		rLoc = 699;
+		rType = 0;
+		vrLen = 2221;
+		vrLoc = 0;
+	};
+	450946DD124BA1FF00479FC6 /* UIGraphics.h */ = {
+		isa = PBXFileReference;
+		name = UIGraphics.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIGraphics.h;
+		sourceTree = "<absolute>";
+	};
+	45094725124BAFF100479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 45094726124BAFF100479FC6 /* NSArray.h */;
+		name = "NSArray.h: 112";
+		rLen = 0;
+		rLoc = 4998;
+		rType = 0;
+		vrLen = 2377;
+		vrLoc = 3543;
+	};
+	45094726124BAFF100479FC6 /* NSArray.h */ = {
+		isa = PBXFileReference;
+		name = NSArray.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h;
+		sourceTree = "<absolute>";
+	};
+	45094727124BAFF100479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 450946B7124B9E7000479FC6 /* UIImage.h */;
+		name = "UIImage.h: 45";
+		rLen = 0;
+		rLoc = 1463;
+		rType = 0;
+		vrLen = 3624;
+		vrLoc = 89;
+	};
+	45094729124BAFF100479FC6 /* UIControl.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = UIControl.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIControl.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 1742}}";
+			sepNavSelRange = "{2741, 0}";
+			sepNavVisRange = "{1363, 3256}";
+		};
+	};
+	4509472B124BAFF100479FC6 /* UIView.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = UIView.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIView.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1930, 3614}}";
+			sepNavSelRange = "{10376, 0}";
+			sepNavVisRange = "{8622, 4305}";
+		};
+	};
+	4509472C124BAFF100479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* ControlCVViewController.h */;
+		name = "ControlCVViewController.h: 22";
+		rLen = 127;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 677;
+		vrLoc = 0;
+	};
+	4509473A124BB0A800479FC6 /* UIButton.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = UIButton.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIButton.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 1521}}";
+			sepNavSelRange = "{677, 0}";
+			sepNavVisRange = "{0, 3150}";
+		};
+	};
+	4509474C124BB27C00479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4509472B124BAFF100479FC6 /* UIView.h */;
+		name = "UIView.h: 217";
+		rLen = 0;
+		rLoc = 10376;
+		rType = 0;
+		vrLen = 4305;
+		vrLoc = 8622;
+	};
+	4509474D124BB27C00479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 45094729124BAFF100479FC6 /* UIControl.h */;
+		name = "UIControl.h: 70";
+		rLen = 0;
+		rLoc = 2741;
+		rType = 0;
+		vrLen = 3256;
+		vrLoc = 1363;
+	};
+	4509474E124BB27C00479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4509473A124BB0A800479FC6 /* UIButton.h */;
+		name = "UIButton.h: 27";
+		rLen = 0;
+		rLoc = 677;
+		rType = 0;
+		vrLen = 3150;
+		vrLoc = 0;
+	};
+	4509474F124BB27C00479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 45094750124BB27C00479FC6 /* UITableViewCell.h */;
+		name = "UITableViewCell.h: 125";
+		rLen = 0;
+		rLoc = 4823;
+		rType = 0;
+		vrLen = 5824;
+		vrLoc = 4504;
+	};
+	45094750124BB27C00479FC6 /* UITableViewCell.h */ = {
+		isa = PBXFileReference;
+		name = UITableViewCell.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UITableViewCell.h;
+		sourceTree = "<absolute>";
+	};
+	45094751124BB27C00479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 45094752124BB27C00479FC6 /* UIAccessibility.h */;
+		name = "UIAccessibility.h: 139";
+		rLen = 54;
+		rLoc = 5007;
+		rType = 0;
+		vrLen = 2041;
+		vrLoc = 3751;
+	};
+	45094752124BB27C00479FC6 /* UIAccessibility.h */ = {
+		isa = PBXFileReference;
+		name = UIAccessibility.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIAccessibility.h;
+		sourceTree = "<absolute>";
+	};
+	45094753124BB27C00479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 45C512F9124B101500A04E84 /* ClipboardTableCell.m */;
+		name = "ClipboardTableCell.m: 14";
+		rLen = 0;
+		rLoc = 282;
+		rType = 0;
+		vrLen = 2912;
+		vrLoc = 0;
+	};
+	45094754124BB27C00479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 45C512F8124B101500A04E84 /* ClipboardTableCell.h */;
+		name = "ClipboardTableCell.h: 20";
+		rLen = 0;
+		rLoc = 417;
+		rType = 0;
+		vrLen = 609;
+		vrLoc = 0;
+	};
+	45094755124BB27C00479FC6 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Incompatible Objective-C types initializing 'struct UIView *', expected 'struct ClipboardTableCell *'";
+		fRef = 28D7ACF70DDB3853001CB0EB /* ControlCVViewController.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 302;
+		rType = 1;
+	};
+	45094756124BB27C00479FC6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* ControlCVViewController.m */;
+		name = "ControlCVViewController.m: 244";
+		rLen = 0;
+		rLoc = 6841;
+		rType = 0;
+		vrLen = 1889;
+		vrLoc = 6451;
 	};
 	457B8FD7124A41A300F5858F /* ControlCV */ = {
 		isa = PBXExecutable;
@@ -345,16 +611,16 @@
 	};
 	45C512F8124B101500A04E84 /* ClipboardTableCell.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1573, 808}}";
-			sepNavSelRange = "{346, 37}";
-			sepNavVisRange = "{0, 390}";
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 848}}";
+			sepNavSelRange = "{417, 0}";
+			sepNavVisRange = "{0, 609}";
 		};
 	};
 	45C512F9124B101500A04E84 /* ClipboardTableCell.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1573, 1469}}";
-			sepNavSelRange = "{2843, 0}";
-			sepNavVisRange = "{279, 3192}";
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 1144}}";
+			sepNavSelRange = "{282, 0}";
+			sepNavVisRange = "{0, 2912}";
 		};
 	};
 	45C51309124B11E000A04E84 /* PBXTextBookmark */ = {
@@ -390,16 +656,6 @@
 		name = UINavigationBar.h;
 		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UINavigationBar.h;
 		sourceTree = "<absolute>";
-	};
-	45C51331124B169E00A04E84 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 28D7ACF60DDB3853001CB0EB /* ControlCVViewController.h */;
-		name = "ControlCVViewController.h: 16";
-		rLen = 0;
-		rLoc = 376;
-		rType = 0;
-		vrLen = 383;
-		vrLoc = 0;
 	};
 	45C51332124B169E00A04E84 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -547,16 +803,6 @@
 		vrLen = 3565;
 		vrLoc = 4527;
 	};
-	45C51442124B7C4900A04E84 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 45C512F8124B101500A04E84 /* ClipboardTableCell.h */;
-		name = "ClipboardTableCell.h: 19";
-		rLen = 37;
-		rLoc = 346;
-		rType = 0;
-		vrLen = 390;
-		vrLoc = 0;
-	};
 	45C51444124B7C4900A04E84 /* PlistBookmark */ = {
 		isa = PlistBookmark;
 		fRef = 8D1107310486CEB800E47090 /* ControlCV-Info.plist */;
@@ -635,35 +881,5 @@
 		rType = 0;
 		vrLen = 2737;
 		vrLoc = 195;
-	};
-	45D4E0EE124B8DE500FDB0C0 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 28D7ACF70DDB3853001CB0EB /* ControlCVViewController.m */;
-		name = "ControlCVViewController.m: 179";
-		rLen = 0;
-		rLoc = 4620;
-		rType = 0;
-		vrLen = 1757;
-		vrLoc = 158;
-	};
-	45D4E0EF124B8DE500FDB0C0 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 45C512F9124B101500A04E84 /* ClipboardTableCell.m */;
-		name = "ClipboardTableCell.m: 36";
-		rLen = 0;
-		rLoc = 1292;
-		rType = 0;
-		vrLen = 2260;
-		vrLoc = 279;
-	};
-	45D4E113124B8FA700FDB0C0 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 45C512F9124B101500A04E84 /* ClipboardTableCell.m */;
-		name = "ClipboardTableCell.m: 59";
-		rLen = 0;
-		rLoc = 2843;
-		rType = 0;
-		vrLen = 3192;
-		vrLoc = 279;
 	};
 }

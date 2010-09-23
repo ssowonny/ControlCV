@@ -10,9 +10,19 @@
 
 @interface ControlCVViewController : UITableViewController< UITableViewDelegate, UITableViewDataSource > {
 	NSMutableArray* m_storage;
+	NSMutableArray* m_thumbnails;
+	NSObject* m_nilObject;
 }
 
 @property (nonatomic, retain) NSMutableArray* storage;
+@property (nonatomic, retain) NSMutableArray* thumbnails;
+@property (nonatomic, retain) NSObject* nilObject;
+
+
+- (void)mailClipTo:(id)sender;
+- (void)deleteClip:(id)sender;
+- (void)pasteClipTo:(id)sender;
+- (void)duplicateClip:(id)sender;
 
 @end
 

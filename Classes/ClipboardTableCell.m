@@ -7,11 +7,11 @@
 //
 
 #import "ClipboardTableCell.h"
-
-#define IMAGE_FULL_WIDTH 220
-#define IMAGE_FULL_HEIGHT 60
+#import "ControlCVViewController.h"
 
 @implementation ClipboardTableCell
+
+@synthesize index=m_index;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
@@ -30,44 +30,36 @@
 		m_firstLabel.adjustsFontSizeToFitWidth = YES;
 		[self addSubview:m_firstLabel];
 		
-		m_clipImageView = [[UIImageView alloc] initWithFrame:CGRectMake( 20, 10, IMAGE_FULL_WIDTH, IMAGE_FULL_HEIGHT )];
+		m_clipImageView = [[UIImageView alloc] initWithFrame:CGRectMake( 20, 10, CLIP_IMAGE_FULL_WIDTH, CLIP_IMAGE_FULL_HEIGHT )];
 		[self addSubview:m_clipImageView];
-		
-		UIButton* pasteto = [[UIButton alloc] initWithFrame:CGRectMake( 250, 10, 29, 29 )];
-		pasteto.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"pasteto.png"]];
-		[pasteto setBackgroundImage:[UIImage imageNamed:@"pasteto.png"] forState:UIControlStateNormal]; 
-		[self addSubview:pasteto];
-		
-		UIButton* mailto = [[UIButton alloc] initWithFrame:CGRectMake( 280, 10, 29, 29 )];
-		mailto.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"pasteto.png"]];
-		[mailto setBackgroundImage:[UIImage imageNamed:@"mailto.png"] forState:UIControlStateNormal]; 
-		[self addSubview:mailto];
-		
-		UIButton* duplicate = [[UIButton alloc] initWithFrame:CGRectMake( 250, 40, 29, 29 )];
-		duplicate.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"pasteto.png"]];
-		[duplicate setBackgroundImage:[UIImage imageNamed:@"duplicate.png"] forState:UIControlStateNormal]; 
-		[self addSubview:duplicate];
-		
-		UIButton* delete = [[UIButton alloc] initWithFrame:CGRectMake( 280, 40, 29, 29 )];
-		delete.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"pasteto.png"]];
-		[delete setBackgroundImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal]; 
-		[self addSubview:delete];
-		
-		/*
-		UIButton* myButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] initWithFrame:CGRectMake(0, 0, 200, 80) ];
-		[myButton setTitle:@"And a button" forState:UIControlStateNormal];
-		[myButton setTitle:@"Alert  " forState:UIControlEventTouchDown];
-		[myButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-		myButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-		myButton.backgroundColor = [UIColor clearColor];
-		//[myButton addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
-		[self addSubview:myButton]; 
-		 */
 		
     }
     return self;
 }
 
+- (void)setButtonAction:(ControlCVViewController*)target
+{
+	UIButton* pasteto = [[UIButton alloc] initWithFrame:CGRectMake( 250, 10, 29, 29 )];
+	pasteto.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"pasteto.png"]];
+	[pasteto setBackgroundImage:[UIImage imageNamed:@"pasteto.png"] forState:UIControlStateNormal];
+	[self addSubview:pasteto];
+	
+	UIButton* mailto = [[UIButton alloc] initWithFrame:CGRectMake( 280, 10, 29, 29 )];
+	mailto.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"pasteto.png"]];
+	[mailto setBackgroundImage:[UIImage imageNamed:@"mailto.png"] forState:UIControlStateNormal]; 
+	[self addSubview:mailto];
+	
+	UIButton* duplicate = [[UIButton alloc] initWithFrame:CGRectMake( 250, 40, 29, 29 )];
+	duplicate.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"pasteto.png"]];
+	[duplicate setBackgroundImage:[UIImage imageNamed:@"duplicate.png"] forState:UIControlStateNormal]; 
+	[self addSubview:duplicate];
+	
+	UIButton* delete = [[UIButton alloc] initWithFrame:CGRectMake( 280, 40, 29, 29 )];
+	delete.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"pasteto.png"]];
+	[delete setBackgroundImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
+	[delete addTarget:target action:@selector(deleteClip:) forControlEvents:UIControlEventTouchUpInside];
+	[self addSubview:delete];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 
@@ -107,12 +99,7 @@
 		m_clipImageView.hidden = YES;
 	} else {
 		m_clipImageView.hidden = NO;
-		
-		CGSize size = image.size;
-		float fRatio = size.width / IMAGE_FULL_WIDTH;
-		CGImageRef imageRef = CGImageCreateWithImageInRect( [image CGImage], CGRectMake( 0, size.height * 0.5f - IMAGE_FULL_HEIGHT * fRatio * 0.5f, IMAGE_FULL_WIDTH * fRatio, IMAGE_FULL_HEIGHT * fRatio ) );
-		m_clipImageView.image = [UIImage imageWithCGImage:imageRef];
-		CGImageRelease( imageRef );
+		m_clipImageView.image = image;		
 	}
 }
 
