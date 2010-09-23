@@ -10,7 +10,12 @@
 
 
 @interface ClipboardTableCell : UITableViewCell {
-
+	UILabel* m_firstLabel;
+	UILabel* m_clipLabel;
+	UIImageView* m_clipImageView;
 }
+
+- (void)setClipText:(NSString*)text;
+- (void)setClipImage:(UIImage*)image;
 
 @end

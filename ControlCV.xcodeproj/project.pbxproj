@@ -17,6 +17,10 @@
 		28D7ACF80DDB3853001CB0EB /* ControlCVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* ControlCVViewController.m */; };
 		45C512F0124B0F9F00A04E84 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C512EF124B0F9F00A04E84 /* background.png */; };
 		45C512FA124B101500A04E84 /* ClipboardTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C512F9124B101500A04E84 /* ClipboardTableCell.m */; };
+		45C51498124B8A2D00A04E84 /* pasteto.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C51494124B8A2D00A04E84 /* pasteto.png */; };
+		45C51499124B8A2D00A04E84 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C51495124B8A2D00A04E84 /* delete.png */; };
+		45C5149A124B8A2D00A04E84 /* mailto.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C51496124B8A2D00A04E84 /* mailto.png */; };
+		45C5149B124B8A2D00A04E84 /* duplicate.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C51497124B8A2D00A04E84 /* duplicate.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +39,10 @@
 		45C512EF124B0F9F00A04E84 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		45C512F8124B101500A04E84 /* ClipboardTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipboardTableCell.h; sourceTree = "<group>"; };
 		45C512F9124B101500A04E84 /* ClipboardTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipboardTableCell.m; sourceTree = "<group>"; };
+		45C51494124B8A2D00A04E84 /* pasteto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pasteto.png; sourceTree = "<group>"; };
+		45C51495124B8A2D00A04E84 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		45C51496124B8A2D00A04E84 /* mailto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mailto.png; sourceTree = "<group>"; };
+		45C51497124B8A2D00A04E84 /* duplicate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = duplicate.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ControlCV-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ControlCV-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +126,10 @@
 		45C512EE124B0F6D00A04E84 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				45C51494124B8A2D00A04E84 /* pasteto.png */,
+				45C51495124B8A2D00A04E84 /* delete.png */,
+				45C51496124B8A2D00A04E84 /* mailto.png */,
+				45C51497124B8A2D00A04E84 /* duplicate.png */,
 				45C512EF124B0F9F00A04E84 /* background.png */,
 			);
 			path = Resources;
@@ -168,6 +180,10 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* ControlCVViewController.xib in Resources */,
 				45C512F0124B0F9F00A04E84 /* background.png in Resources */,
+				45C51498124B8A2D00A04E84 /* pasteto.png in Resources */,
+				45C51499124B8A2D00A04E84 /* delete.png in Resources */,
+				45C5149A124B8A2D00A04E84 /* mailto.png in Resources */,
+				45C5149B124B8A2D00A04E84 /* duplicate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

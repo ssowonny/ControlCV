@@ -53,6 +53,9 @@
 	{
 		self.storage = [[[NSMutableArray alloc] init] autorelease];
 	}
+	
+	// reset storage
+	//[self.storage removeAllObjects];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -79,14 +82,17 @@
 					UIImage* image = [item objectForKey:key];
 					data = UIImagePNGRepresentation( image );
 					type = @"image";
-				} else {
+				} else if( [key isEqualToString:@"public.plain-text"] || [key isEqualToString:@"public.utf8-plain-text"] ) {
 					data = [item objectForKey:key];
 					type = @"string";
 				}
 				
-				// type, data, change count
-				NSArray* a = [[[NSArray alloc] initWithObjects:type, data, changeCount, nil] autorelease];
-				[m_storage addObject:a];
+				if(type != nil )
+				{
+					// type, data, change count
+					NSArray* a = [[[NSArray alloc] initWithObjects:type, data, changeCount, nil] autorelease];
+					[m_storage addObject:a];
+				}
 			}
 		}
 
@@ -155,6 +161,11 @@
 	return m_storage.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return 80;
+}
+
 - (UITableViewCell*) tableView:(UITableView*)tv
 		 cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
@@ -163,9 +174,9 @@
 	ClipboardTableCell* cell = (ClipboardTableCell*)[tv dequeueReusableCellWithIdentifier:Identifier];
 	if( cell == nil )
 	{
-		cell = [[[ClipboardTableCell alloc] initWithStyle:UITableViewCellStyleDefault
+		cell = [[[ClipboardTableCell alloc] initWithFrame:CGRectMake( 0, 0, 0, 0 )
 									   reuseIdentifier:Identifier] autorelease];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.accessoryType = UITableViewCellAccessoryNone;
 	}
 	
 	// reverse order
@@ -173,11 +184,13 @@
 	NSString* type = (NSString*)[item objectAtIndex:0];
 	if( [type isEqualToString:@"string"] )
 	{
-		cell.textLabel.text = [item objectAtIndex:1];
-		cell.imageView.image = nil;
+		//cell.clipLabel.text = [item objectAtIndex:1];
+		[cell setClipText:[item objectAtIndex:1]];
+		[cell setClipImage:nil];
 	} else {
-		cell.textLabel.text = @"";
-		cell.imageView.image = [UIImage imageWithData:[item objectAtIndex:1]];
+		//cell.clipLabel.text = @"";
+		[cell setClipText:@""];
+		[cell setClipImage:[UIImage imageWithData:[item objectAtIndex:1]]];
 	}
 	
 	
