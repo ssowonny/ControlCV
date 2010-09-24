@@ -8,6 +8,7 @@
 
 #import "ClipboardTableCell.h"
 #import "ControlCVViewController.h"
+#import "Defines.h"
 
 @implementation ClipboardTableCell
 
@@ -19,12 +20,14 @@
 		
 		m_clipLabel = [[UILabel alloc] initWithFrame:CGRectMake( 50, 10, 180, 60 )];
 		m_clipLabel.numberOfLines = 2;
-		m_clipLabel.font = [UIFont fontWithName:@"American Typewriter" size:14];
+		m_clipLabel.font = DEFAULT_FONT( 14 );
+		m_clipLabel.textColor = DEFAULT_FONT_COLOR;
 		m_clipLabel.backgroundColor = [UIColor clearColor];
 		[self addSubview:m_clipLabel];
 		
 		m_firstLabel = [[UILabel alloc] initWithFrame:CGRectMake( 10, 10, 40, 60 )];
-		m_firstLabel.font = [UIFont fontWithName:@"American Typewriter" size:40];
+		m_firstLabel.font = DEFAULT_FONT( 40 );
+		m_firstLabel.textColor = DEFAULT_FONT_COLOR;
 		m_firstLabel.backgroundColor = [UIColor clearColor];
 		m_firstLabel.textAlignment = UITextAlignmentCenter;
 		m_firstLabel.adjustsFontSizeToFitWidth = YES;
@@ -42,6 +45,7 @@
 	UIButton* pasteto = [[UIButton alloc] initWithFrame:CGRectMake( 250, 10, 29, 29 )];
 	pasteto.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"pasteto.png"]];
 	[pasteto setBackgroundImage:[UIImage imageNamed:@"pasteto.png"] forState:UIControlStateNormal];
+	[pasteto addTarget:target action:@selector(pasteClipTo:) forControlEvents:UIControlEventTouchUpInside];
 	[self addSubview:pasteto];
 	
 	UIButton* mailto = [[UIButton alloc] initWithFrame:CGRectMake( 280, 10, 29, 29 )];
@@ -51,7 +55,8 @@
 	
 	UIButton* duplicate = [[UIButton alloc] initWithFrame:CGRectMake( 250, 40, 29, 29 )];
 	duplicate.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"pasteto.png"]];
-	[duplicate setBackgroundImage:[UIImage imageNamed:@"duplicate.png"] forState:UIControlStateNormal]; 
+	[duplicate setBackgroundImage:[UIImage imageNamed:@"duplicate.png"] forState:UIControlStateNormal];
+	[duplicate addTarget:target action:@selector(duplicateClip:) forControlEvents:UIControlEventTouchUpInside];
 	[self addSubview:duplicate];
 	
 	UIButton* delete = [[UIButton alloc] initWithFrame:CGRectMake( 280, 40, 29, 29 )];

@@ -8,6 +8,19 @@
 
 #import "ControlCVViewController.h"
 #import "ClipboardTableCell.h"
+#import "ClipViewController.h"
+#import "ConnectionController.h"
+
+//type, data, change count, thumbnail
+enum ITEM_CONTAINS
+{
+	ITEM_TYPE,
+	ITEM_DATA,
+	ITEM_CHANGE_COUNT,
+	ITEM_THUMBNAIL,
+	
+	ITEM_CONTAIN_SIZE
+};
 
 @interface ControlCVViewController( Private )
 
@@ -23,15 +36,16 @@
 @synthesize thumbnails=m_thumbnails;
 @synthesize nilObject=m_nilObject;
 
-/*
+
 // The designated initializer. Override to perform setup that is required before the view is loaded.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         // Custom initialization
+		m_pConnection = nil;
     }
     return self;
 }
-*/
+
 
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -42,6 +56,10 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	// connection
+	m_pConnection = [[ConnectionController alloc] init];
+	[m_pConnection start];
 	
 	// set background clear
 	self.tableView.backgroundColor = [UIColor clearColor];
@@ -146,6 +164,7 @@
 					// type, data, change count, thumbnail
 					NSArray* a = [[[NSArray alloc] initWithObjects:type, data, changeCount, thumbnail, nil] autorelease];
 					[m_storage addObject:a];
+					[m_thumbnails addObject:m_nilObject];
 				}
 			}
 		}
@@ -180,6 +199,10 @@
 	self.storage = nil;
 	self.thumbnails = nil;
 	self.nilObject = nil;
+	
+	[m_pConnection stop];
+	[m_pConnection release];
+	m_pConnection = nil;
 }
 
 
@@ -187,6 +210,11 @@
 	[m_storage release];
 	[m_thumbnails release];
 	[m_nilObject release];
+	if( m_pConnection )
+	{
+		[m_pConnection stop];
+		[m_pConnection release];
+	}
 	
     [super dealloc];
 }
@@ -205,6 +233,23 @@
 	
 	[self.tableView reloadData];
 	 */
+	
+	ClipViewController* clipViewController = [[ClipViewController alloc] initWithNibName:@"ClipView" bundle:nil];
+	
+	NSInteger index = (m_storage.count - [indexPath row] - 1);
+	NSArray* item = [m_storage objectAtIndex:index];
+	if( [@"string" isEqualToString:[item objectAtIndex:ITEM_TYPE]] )
+	{
+		// for text
+		clipViewController.clipText = [item objectAtIndex:ITEM_DATA];
+	} else {
+		// for image
+		clipViewController.clipImage = [UIImage imageWithData:[item objectAtIndex:ITEM_DATA]];
+	}
+	
+	[self.navigationController pushViewController:clipViewController animated:YES];
+	
+	[clipViewController release];
 }
 
 
@@ -249,7 +294,7 @@
 	if( [type isEqualToString:@"string"] )
 	{
 		//cell.clipLabel.text = [item objectAtIndex:1];
-		[cell setClipText:[item objectAtIndex:1]];
+		[cell setClipText:[item objectAtIndex:ITEM_DATA]];
 		[cell setClipImage:nil];
 	} else {
 		//cell.clipLabel.text = @"";
@@ -313,10 +358,46 @@
 
 - (void)pasteClipTo:(id)sender
 {
+	UIButton* btn = (UIButton*)sender;
+	ClipboardTableCell* cell = (ClipboardTableCell*)btn.superview;
+	
+	NSInteger index = cell.index;
+	NSArray* item = [m_storage objectAtIndex:index];
+	if( [@"string" isEqualToString:[item objectAtIndex:ITEM_TYPE]] )
+	{
+		NSString* string = [NSString stringWithFormat:@"%@\r\n",[item objectAtIndex:ITEM_DATA]];
+		
+		int iType = 1;
+		NSMutableData* data = [NSMutableData dataWithBytes:&iType length:sizeof( int )];
+		[data appendData:[string dataUsingEncoding:NSUTF8StringEncoding]];
+		
+		[m_pConnection writeData:data];
+	} else if( [@"image" isEqualToString:[item objectAtIndex:ITEM_TYPE]] ) {
+		NSData* originalData = (NSData*)[item objectAtIndex:ITEM_DATA];
+		
+		int iType = 2;
+		NSMutableData* data = [NSMutableData dataWithBytes:&iType length:sizeof( int )];
+		[data appendData:originalData];
+		
+		[m_pConnection writeData:data];
+	}
 }
 
 - (void)duplicateClip:(id)sender
 {
+	UIButton* btn = (UIButton*)sender;
+	ClipboardTableCell* cell = (ClipboardTableCell*)btn.superview;
+	
+	NSInteger index = cell.index;
+	NSArray* item = [m_storage objectAtIndex:index];
+	
+	NSArray* dup = [item copy];
+	[m_storage insertObject:dup atIndex:index];
+	[m_thumbnails insertObject:m_nilObject atIndex:index];
+	[dup release];
+	[self storeData];
+	
+	[self.tableView reloadData];
 }
 
 @end

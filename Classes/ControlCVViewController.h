@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class ConnectionController;
 @interface ControlCVViewController : UITableViewController< UITableViewDelegate, UITableViewDataSource > {
 	NSMutableArray* m_storage;
 	NSMutableArray* m_thumbnails;
 	NSObject* m_nilObject;
+	ConnectionController* m_pConnection;
 }
 
 @property (nonatomic, retain) NSMutableArray* storage;
