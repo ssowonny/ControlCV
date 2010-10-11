@@ -7,16 +7,17 @@
 //
 
 #import "ConnectionController.h"
-
+#import "CCVPacketHeader.h"
 
 @implementation ConnectionController
 
-- (id)init
+- (id)initWithDelegate:(id)delegate
 {
 	if( ( self = [super init] ) )
 	{
 		m_listenSocket = [[AsyncSocket alloc] initWithDelegate:self];
 		m_connectedSockets = [[NSMutableArray alloc] initWithCapacity:1];
+		m_delegate = delegate;
 	}
 	
 	return self;
@@ -32,29 +33,68 @@
 
 - (BOOL)start
 {
-	NSError* error = [[[NSError alloc] init] autorelease];
-	if( ![m_listenSocket connectToHost:@"127.0.0.1" onPort:4098 error:&error] )
+	[m_listenSocket setRunLoopModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+	
+	int iPort = 4098;
+	
+	NSError* error = nil;
+	if( ![m_listenSocket acceptOnPort:iPort error:&error] )
 	{
-		NSLog( @"Fail to connect." );
-		return FALSE;
+		UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Connection error" message:@"Fail to listen socket" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
 	}
+	
 	
 	return TRUE;
 }
 
 - (BOOL)stop
 {
+	[m_listenSocket disconnect];
+	for( AsyncSocket* socket in m_connectedSockets )
+	{
+		[socket disconnect];
+	}
+	
 	return TRUE;
+}
+
+- (void)onSocket:(AsyncSocket *)sock didAcceptNewSocket:(AsyncSocket *)newSocket
+{
+	[m_connectedSockets addObject:newSocket];
 }
 
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
 {
-	//NSData* data = [@"Hello world" dataUsingEncoding:NSUTF8StringEncoding];
-	//[sock writeData:data withTimeout:-1 tag:1];
-	//[sock disconnect];
-	[sock readDataWithTimeout:-1 tag:1];
+	NSString *welcomeMsg = @"ctrlcv. connected.\r\n";
+	NSData *welcomeData = [welcomeMsg dataUsingEncoding:NSUTF8StringEncoding];
+	
+	[sock writeData:welcomeData withTimeout:-1 tag:1];
+	
+	// initial read
+	[sock readDataToData:[AsyncSocket ZeroData] withTimeout:-1 tag:0];
 }
 
+- (BOOL)writeDataToAll:(NSData*)data
+{
+	CCVPacketHeader header;
+	header.iHeaderSize = sizeof( header );
+	header.iVersion = 0x0100;
+	header.iContentSize = [data length];
+	
+	NSMutableData* sendData = [NSMutableData dataWithBytes:&header length:sizeof( CCVPacketHeader )];
+	[sendData appendData:data];
+	
+	for( AsyncSocket* socket in m_connectedSockets )
+	{
+		[socket writeData:sendData withTimeout:-1 tag:0];
+	}
+	
+	return YES;
+}
+
+/*
 - (BOOL)writeData:(NSData*)data
 {
 	if( ![m_listenSocket isConnected] )
@@ -65,6 +105,11 @@
 	[m_listenSocket writeData:data withTimeout:-1 tag:1];
 	
 	return TRUE;
+}*/
+
+- (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag
+{
+	//[sock readDataToData:[AsyncSocket CRLFData] withTimeout:-1 tag:0];
 }
 
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
@@ -73,21 +118,22 @@
 	NSString *msg = [[[NSString alloc] initWithData:strData encoding:NSUTF8StringEncoding] autorelease];
 	if(msg)
 	{
-		//[self logMessage:msg];
-		NSLog( msg );
+		NSLog( @"%@", msg );
 	}
 	else
 	{
 		NSLog( @"Error converting received data into UTF-8 String" );
-		//[self logError:@"Error converting received data into UTF-8 String"];
 	}
 	
-	// Even if we were unable to write the incoming data to the log,
-	// we're still going to echo it back to the client.
-	NSString *welcomeMsg = @"Welcome to the AsyncSocket Echo Server\r\n";
-	NSData *welcomeData = [welcomeMsg dataUsingEncoding:NSUTF8StringEncoding];
+	// call delegate function
+	[m_delegate onReadData:data];
 	
-	[sock writeData:welcomeData withTimeout:-1 tag:1];
+	// do response
+	// NSData* response = [@"ctrlcv. Add OK.\r\n" dataUsingEncoding:NSUTF8StringEncoding];
+	// [sock writeData:response withTimeout:-1 tag:1];
+	
+	// read again
+	[sock readDataToData:[AsyncSocket ZeroData] withTimeout:-1 tag:0];
 }
 
 - (void)onSocket:(AsyncSocket*)sock willDisconnectWithError:(NSError*)error
@@ -95,9 +141,14 @@
 	if( error )
 	{
 		NSLog( @"Something went wrong while connecting" );
-		
 	}
 }
+
+- (void)onSocketDidDisconnect:(AsyncSocket *)sock
+{
+	[m_connectedSockets removeObject:sock];
+}
+
 
 
 @end

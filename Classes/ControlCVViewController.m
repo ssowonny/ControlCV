@@ -10,6 +10,7 @@
 #import "ClipboardTableCell.h"
 #import "ClipViewController.h"
 #import "ConnectionController.h"
+#import "SettingViewController.h"
 
 //type, data, change count, thumbnail
 enum ITEM_CONTAINS
@@ -25,9 +26,25 @@ enum ITEM_CONTAINS
 @interface ControlCVViewController( Private )
 
 - (void)storeData;
+- (void)storeImage:(NSString*)filename data:(NSData*)data;
 - (UIImage*)thumbnailAtIndex:(NSInteger)index;
+- (UIImage*)imageWithFilename:(NSString*)filename;
+- (NSString*)pathForFilename:(NSString *)filename;
 
 @end
+
+NSString* dateString()
+{
+	NSDate* date = [NSDate date];
+	//NSDateFormatter* formatter = [[NSDateFormatter alloc] initWithDateFormat:@"%Y%m%d%h%M%S" allowNaturalLanguage:NO];
+	NSDateFormatter* df = [[NSDateFormatter alloc] init];
+	[df setDateFormat:@"yyyyMMddHHmmssSSS"];
+	
+	NSString* str = [df stringFromDate:date];
+	[df release];
+	
+	return str;
+}
 
 
 @implementation ControlCVViewController
@@ -58,15 +75,24 @@ enum ITEM_CONTAINS
     [super viewDidLoad];
 	
 	// connection
-	m_pConnection = [[ConnectionController alloc] init];
+	m_pConnection = [[ConnectionController alloc] initWithDelegate:self];
 	[m_pConnection start];
 	
 	// set background clear
 	self.tableView.backgroundColor = [UIColor clearColor];
+	
+	// add setting button to navigation bar
+	// { 
+	UIButton* button = [UIButton buttonWithType:UIButtonTypeInfoDark];
+	[button addTarget:self action:@selector(pushSettingView) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem* barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+	
+	self.navigationItem.rightBarButtonItem = barButton;
+	
+	[barButton release];
+	// }
 
 	// load
-	//NSString *path = [[NSBundle mainBundle] resourcePath];
-	//NSString *filePath = [path stringByAppendingPathComponent:@"ControlCV.plist"];
 	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = [paths objectAtIndex:0];
     NSString* filePath = [documentsDirectory stringByAppendingPathComponent:@"clipboard.plist"];
@@ -85,8 +111,10 @@ enum ITEM_CONTAINS
 	}
 	
 	// reset storage
-	// [self.storage removeAllObjects];
-	// [self.thumbnail removeAllObjects];
+	[self.storage removeAllObjects];
+	[self.thumbnails removeAllObjects];
+	
+	
 }
 
 - (UIImage*)generateThumbnail:(UIImage*)image
@@ -127,10 +155,12 @@ enum ITEM_CONTAINS
 	return thumbnail;
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	NSArray* topItem = [m_storage lastObject];
-	NSString* changeCount = [NSString stringWithFormat:@"%d", [[UIPasteboard generalPasteboard] changeCount]];
+	NSString* changeCount = [NSString stringWithFormat:@"%05d", [[UIPasteboard generalPasteboard] changeCount]];
 	if( topItem == NULL || ![changeCount isEqualToString:[topItem objectAtIndex:2]] )
 	{
 	
@@ -146,12 +176,20 @@ enum ITEM_CONTAINS
 				if( [key isEqualToString:@"public.jpeg"] )
 				{
 					UIImage* image = [item objectForKey:key];
-					data = UIImageJPEGRepresentation( image, 0.8f );
+					
+					NSString* filename = [NSString stringWithFormat:@"%@%@", dateString(), changeCount];
+					[self storeImage:filename data:UIImageJPEGRepresentation( image, 0.8f )];
+					data = filename;
+					
 					thumbnail = UIImageJPEGRepresentation( [self generateThumbnail:image], 0.8f );
 					type = @"image";
 				} else if( [key isEqualToString:@"public.png"] ) {
 					UIImage* image = [item objectForKey:key];
-					data = UIImagePNGRepresentation( image );
+					
+					NSString* filename = [NSString stringWithFormat:@"%@%@", dateString(), changeCount];
+					[self storeImage:filename data:UIImagePNGRepresentation( image )];
+					data = filename;
+					
 					thumbnail = UIImagePNGRepresentation( [self generateThumbnail:image] );
 					type = @"image";
 				} else if( [key isEqualToString:@"public.plain-text"] || [key isEqualToString:@"public.utf8-plain-text"] ) {
@@ -161,7 +199,7 @@ enum ITEM_CONTAINS
 				
 				if(type != nil )
 				{
-					// type, data, change count, thumbnail
+					// type, data/filename, change count, thumbnail
 					NSArray* a = [[[NSArray alloc] initWithObjects:type, data, changeCount, thumbnail, nil] autorelease];
 					[m_storage addObject:a];
 					[m_thumbnails addObject:m_nilObject];
@@ -174,6 +212,23 @@ enum ITEM_CONTAINS
 		
 		[self.tableView reloadData];
 	}
+	
+	// unselect selected cell
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
+	
+	
+}
+
+- (void)pushSettingView
+{
+	SettingViewController* controller = [[SettingViewController alloc] initWithNibName:@"SettingView" bundle:nil];
+	[self.navigationController pushViewController:controller animated:YES];
+	[controller release];
+	/*
+	UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"setting pushed" message:@"no message" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+	[alert show];
+	[alert release];
+	 */
 }
 
 
@@ -224,15 +279,8 @@ enum ITEM_CONTAINS
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	/*
+
 	// remove and store
-	NSInteger index = (m_storage.count - [indexPath row] - 1);
-	[m_storage removeObjectAtIndex:index];
-	[m_thumbnails removeObjectAtIndex:index];
-	[self storeData];
-	
-	[self.tableView reloadData];
-	 */
 	
 	ClipViewController* clipViewController = [[ClipViewController alloc] initWithNibName:@"ClipView" bundle:nil];
 	
@@ -244,7 +292,8 @@ enum ITEM_CONTAINS
 		clipViewController.clipText = [item objectAtIndex:ITEM_DATA];
 	} else {
 		// for image
-		clipViewController.clipImage = [UIImage imageWithData:[item objectAtIndex:ITEM_DATA]];
+		NSString* filename = [item objectAtIndex:ITEM_DATA];
+		clipViewController.clipImage = [self imageWithFilename:filename];//[UIImage imageWithContentsOfFile:filePath];
 	}
 	
 	[self.navigationController pushViewController:clipViewController animated:YES];
@@ -319,7 +368,7 @@ enum ITEM_CONTAINS
 	if( ![m_storage writeToFile:filePath atomically:YES] )
 	{
 		NSLog( @"Fail to write." );
-	}	
+	}
 }
 
 - (UIImage*)thumbnailAtIndex:(NSInteger)index
@@ -346,9 +395,19 @@ enum ITEM_CONTAINS
 {
 	UIButton* btn = (UIButton*)sender;
 	ClipboardTableCell* cell = (ClipboardTableCell*)btn.superview;
+	NSInteger index = cell.index;
+	NSArray* item = [m_storage objectAtIndex:index];
+	
+	// if image, delete image file
+	NSString* filename = [item objectAtIndex:ITEM_DATA];
+	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString* documentsDirectory = [paths objectAtIndex:0];
+	NSString* filePath = [documentsDirectory stringByAppendingPathComponent:filename];
+	NSFileManager* fm = [NSFileManager defaultManager];
+	[fm removeItemAtPath:filePath error:nil];
 	
 	// remove and store
-	NSInteger index = cell.index;
+	
 	[m_storage removeObjectAtIndex:index];
 	[m_thumbnails removeObjectAtIndex:index];
 	[self storeData];
@@ -371,15 +430,18 @@ enum ITEM_CONTAINS
 		NSMutableData* data = [NSMutableData dataWithBytes:&iType length:sizeof( int )];
 		[data appendData:[string dataUsingEncoding:NSUTF8StringEncoding]];
 		
-		[m_pConnection writeData:data];
+		//[m_pConnection writeData:data];
+		[m_pConnection writeDataToAll:data];
 	} else if( [@"image" isEqualToString:[item objectAtIndex:ITEM_TYPE]] ) {
-		NSData* originalData = (NSData*)[item objectAtIndex:ITEM_DATA];
+		NSString* filename = (NSString*)[item objectAtIndex:ITEM_DATA];
+		NSData* originalData = [NSData dataWithContentsOfFile:[self pathForFilename:filename]];
 		
 		int iType = 2;
 		NSMutableData* data = [NSMutableData dataWithBytes:&iType length:sizeof( int )];
 		[data appendData:originalData];
 		
-		[m_pConnection writeData:data];
+		//[m_pConnection writeData:data];
+		[m_pConnection writeDataToAll:data];
 	}
 }
 
@@ -391,13 +453,100 @@ enum ITEM_CONTAINS
 	NSInteger index = cell.index;
 	NSArray* item = [m_storage objectAtIndex:index];
 	
-	NSArray* dup = [item copy];
+	NSArray* copy = [item copy];
+	NSMutableArray* dup = [[NSMutableArray alloc] initWithArray:item];
+	[copy release];
+	
 	[m_storage insertObject:dup atIndex:index];
 	[m_thumbnails insertObject:m_nilObject atIndex:index];
+	if( [@"image" isEqualToString:[item objectAtIndex:ITEM_TYPE]] )
+	{
+		// duplicate_image
+		NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString* documentsDirectory = [paths objectAtIndex:0];
+		NSString* filePath = [documentsDirectory stringByAppendingPathComponent:[item objectAtIndex:ITEM_DATA]];
+		NSData* data = [NSData dataWithContentsOfFile:filePath];
+		
+		// todo : duplicate twice makes same file name
+		NSString* oldFilename = (NSString*)[item objectAtIndex:ITEM_DATA];
+		NSString* newFilename = [NSString stringWithFormat:@"%@%@", dateString(), [oldFilename substringFromIndex:([oldFilename length]-5)]];
+		filePath = [documentsDirectory stringByAppendingPathComponent:newFilename];
+		[data writeToFile:filePath atomically:YES];
+
+		[dup replaceObjectAtIndex:ITEM_DATA withObject:newFilename];
+	}
+	
 	[dup release];
 	[self storeData];
 	
 	[self.tableView reloadData];
+}
+
+- (void)storeImage:(NSString*)filename data:(NSData*)data
+{
+	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [paths objectAtIndex:0];	
+    NSString* filePath = [documentsDirectory stringByAppendingPathComponent:filename];
+	
+	if( ![data writeToFile:filePath atomically:YES] )
+	{
+		NSLog( @"Fail to write image." );
+	}	
+}
+
+#pragma mark -
+#pragma mark ConnectionDelegate
+
+- (void)onReadData:(NSData *)readData
+{
+	NSArray* item = [m_storage lastObject];
+	
+	NSString* type = @"string";
+	NSString* changeCount = @"-1";
+	if( item )
+	{
+		changeCount = [item objectAtIndex:ITEM_CHANGE_COUNT];
+	}
+	
+	NSObject* thumbnail = nil;
+	NSData *strData = [readData subdataWithRange:NSMakeRange(0, [readData length] - 2)];
+	NSString *data = [[[NSString alloc] initWithData:strData encoding:NSUTF8StringEncoding] autorelease];
+	if( data == nil )
+	{
+		data = [[[NSString alloc] initWithData:strData encoding:NSASCIIStringEncoding] autorelease];
+	}
+	
+	if( data == nil )
+	{
+		data = [NSString stringWithFormat:@"Unkown encoding error."];
+	}
+	
+	if(type != nil )
+	{
+		// type, data/filename, change count, thumbnail
+		NSArray* item = [[[NSArray alloc] initWithObjects:type, data, changeCount, thumbnail, nil] autorelease];
+		[m_storage addObject:item];
+		[m_thumbnails addObject:m_nilObject];
+	}
+
+	// store data
+	[self storeData];
+
+	[self.tableView reloadData];
+}
+
+- (NSString*)pathForFilename:(NSString*)filename
+{
+	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString* documentsDirectory = [paths objectAtIndex:0];	
+	NSString* filePath = [documentsDirectory stringByAppendingPathComponent:filename];
+	
+	return filePath;
+}
+
+- (UIImage*)imageWithFilename:(NSString*)filename
+{
+	return [UIImage imageWithContentsOfFile:[self pathForFilename:filename]];
 }
 
 @end

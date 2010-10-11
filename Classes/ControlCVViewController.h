@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ConnectionController.h"
 
 @class ConnectionController;
-@interface ControlCVViewController : UITableViewController< UITableViewDelegate, UITableViewDataSource > {
+@interface ControlCVViewController : UITableViewController< UITableViewDelegate, UITableViewDataSource, ConnectionDelegate > {
 	NSMutableArray* m_storage;
 	NSMutableArray* m_thumbnails;
 	NSObject* m_nilObject;
@@ -26,5 +27,6 @@
 - (void)pasteClipTo:(id)sender;
 - (void)duplicateClip:(id)sender;
 
+- (void)pushSettingView;
 @end
 

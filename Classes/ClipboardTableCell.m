@@ -35,7 +35,10 @@
 		
 		m_clipImageView = [[UIImageView alloc] initWithFrame:CGRectMake( 20, 10, CLIP_IMAGE_FULL_WIDTH, CLIP_IMAGE_FULL_HEIGHT )];
 		[self addSubview:m_clipImageView];
-		
+
+		// set selected background
+		self.selectedBackgroundView = [[[UIView alloc] init] autorelease];
+		self.selectedBackgroundView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
     }
     return self;
 }
@@ -71,6 +74,7 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+	
 }
 
 

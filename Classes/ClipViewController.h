@@ -11,13 +11,16 @@
 
 @interface ClipViewController : UIViewController {
 	UIImageView* m_imageView;
+	UIWebView* m_webView;
 	UITextView* m_textView;
 	UIImage* m_clipImage;
 	NSString* m_clipText;
+	UIScrollView* m_scrollView;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView* imageView;
 @property (nonatomic, retain) IBOutlet UITextView* textView;
+@property (nonatomic, retain) IBOutlet UIScrollView* scrollView;
 @property (nonatomic, retain) UIImage* clipImage;
 @property (nonatomic, retain) NSString* clipText;
 

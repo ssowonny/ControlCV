@@ -9,13 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "AsyncSocket.h"
 
+@protocol ConnectionDelegate
+
+@required
+- (void)onReadData:(NSData*)data;
+
+@end
+
 @interface ConnectionController : NSObject {
 	AsyncSocket* m_listenSocket;
 	NSMutableArray* m_connectedSockets;
+	id m_delegate;
 }
 
 - (BOOL)start;
 - (BOOL)stop;
-- (BOOL)writeData:(NSData*)data;
+- (BOOL)writeDataToAll:(NSData*)data;
+//- (BOOL)writeData:(NSData*)data;
 
 @end
